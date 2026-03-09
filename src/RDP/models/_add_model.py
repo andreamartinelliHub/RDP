@@ -3,8 +3,7 @@ import argparse
 import sys
 
 # Blueprint
-MODEL_TEMPLATE = """
-import torch
+MODEL_TEMPLATE = """import torch
 from torch import nn
 {import_layers}
 
@@ -46,7 +45,7 @@ class {class_name}(Base):
         batch_size = x.shape[0]
         # ... compute output
 
-        return output # shape = [batch_size, future_length, channels, quantiles]
+        return # output # shape = [batch_size, future_length, channels, quantiles]
 """
 
 LAYER_TEMPLATE = """
@@ -66,13 +65,14 @@ class CustomLayer(nn.Module):
         return out
 """
 
-def create_model_file(model_name, needed_aux_folder=True):
+def create_model_file(model_name, needed_aux_folder=True, path_models_folder='.'):
     
     model_id = model_name.lower()
     model_name = model_id.capitalize()
     
-    model_file_path = Path(f"{model_id}.py")
-    aux_folder = Path(f"./{model_id}/")
+    path_models_folder = Path(path_models_folder)
+    model_file_path = path_models_folder/f"{model_id}.py"
+    aux_folder = path_models_folder/f"./{model_id}/"
 
     # check possible overwriting
     ovewrite_smth = False
@@ -82,12 +82,14 @@ def create_model_file(model_name, needed_aux_folder=True):
     if (needed_aux_folder and aux_folder.exists()):
         print(f"🛑 '{aux_folder}/' already exists!")
         ovewrite_smth = True
+        
     if ovewrite_smth:
         print("Overwriting something! Maybe you should change the model name!")
-        response = input("Do you want to overwrite it anyway? (Do you want to delete the existing file?) [yes/N]:").lower()
+        response = input("Do you want to overwrite it anyway? (Do you want to delete the existing file?) [yes/N]:")
         # only if you write exactly 'yes' you'll overwrite it!
         if response != 'yes':
             sys.exit(1)
+
 
     import_layers = f'from .{aux_folder}.layers import CustomLayer' if needed_aux_folder else ''
     # Formatting the template
@@ -113,10 +115,12 @@ def main():
         description="Generate model files and folders. This file has to be located in the folder src/RDP/model."
         )
     parser.add_argument("model_name", type=str, help="The name of the model class to create")
-    parser.add_argument("--aux", action="store_true", help="Create an auxiliary layers folder")
-
+    parser.add_argument("-a","-l","-c","--aux", action="store_true", help="Create an auxiliary layers folder")
     args = parser.parse_args()
-    create_model_file(args.model_name, args.aux)
+
+    path_models_folder = '/home/anmartinelli/FBK/RDP/src/RDP/models' # to-do: avoid hardcoded
+
+    create_model_file(args.model_name, args.aux, path_models_folder)
 
 
 if __name__ == "__main__":

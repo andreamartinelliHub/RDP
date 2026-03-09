@@ -14,7 +14,7 @@ class Registry:
         # Version 0.0.1: printing a registry means check classes it is tracking 
         items = list(self._module_dict.keys())
         return f"Registry(name='{self._name}', items={items})"
-
+    
     @classmethod
     def show_all(cls):
         # print("\nShow each Registry!")
