@@ -62,14 +62,6 @@ MODEL_REGISTRY = Registry("MODELS")
 DATASET_REGISTRY = Registry("DATASETS")
 CONFIGS_REGISTRY = Registry("CONFIGS")
 
-#### For each model you want to add to the library make sure the file has the lines below:
-    # from .registry import MODEL_REGISTRY
-
-    # @MODEL_REGISTRY.register("chronos")
-    # class ChronosModel:
-# Use the proper registry: MODEL_REGISTRY or DATASET_REGISTRY (or one of these intantiated here)
-
-
 ### here the example of the usage:
 def main():
 
@@ -123,6 +115,11 @@ if __name__ == "__main__":
             print("\nInitializing...")
             for k,v in config.items():
                 print(f'> {k:10}: {v}')
+
+    @MODEL_REGISTRY.register("modelC", verbose=verbose)
+    class Model_C:
+        def __init__(self, config):
+            pass
 
     @DATASET_REGISTRY.register("weather", verbose=verbose)
     class Weather:

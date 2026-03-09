@@ -1,0 +1,8 @@
+pipeline:
+  model_name: 'chronos2'
+  dataset_name: 'weather'
+
+paths:
+  root: /home/anmartinelli/FBK/RDP/
+  model_folder: ${.root}/src/RDP/models/
+  dataset_folder: ${.root}/src/RDP/datasets/
