@@ -17,7 +17,7 @@ class Registry:
 
     @classmethod
     def show_all(cls):
-        print("\nShow each Registry!")
+        # print("\nShow each Registry!")
         print("\n--- GLOBAL REGISTRY STATUS ---")
         # for registry in cls._all_registries:
         #     print(registry)
