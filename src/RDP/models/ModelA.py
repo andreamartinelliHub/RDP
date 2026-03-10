@@ -1,6 +1,6 @@
-from ..registry import MODEL_REGISTRY
+from ..registry import MODELS_REGISTRY
 
-@MODEL_REGISTRY.register("modelA")
+@MODELS_REGISTRY.register("modelA")
 class ModelA:
     def __init__(self, config):
         print("Initializing ModelA...")

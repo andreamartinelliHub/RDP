@@ -15,7 +15,7 @@ from typing import List, Union
 from .utils import QuantileLossMO, CPRS
 import torch.nn as nn
 from torch.optim import Adam, AdamW, SGD, RMSprop
-from ..registry import MODEL_REGISTRY   
+from ..registry import MODELS_REGISTRY   
 
 def standardize_momentum(x,order):
     mean = torch.mean(x,1).unsqueeze(1).repeat(1,x.shape[1],1)
@@ -44,7 +44,7 @@ def dilate_loss(outputs, targets, alpha, gamma, device):
 	loss = alpha*loss_shape+ (1-alpha)*loss_temporal
 	return loss#, loss_shape, loss_temporal
 
-@MODEL_REGISTRY.register("base")
+@MODELS_REGISTRY.register("base")
 class Base(pl.LightningModule):
     
     ############### SET THE PROPERTIES OF THE ARCHITECTURE##############

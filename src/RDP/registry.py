@@ -56,9 +56,10 @@ class Registry:
         return self._module_dict[name]
 
 # Instantiate here the needed Registries
-MODEL_REGISTRY = Registry("MODELS")
-DATASET_REGISTRY = Registry("DATASETS")
+MODELS_REGISTRY = Registry("MODELS")
+DATASETS_REGISTRY = Registry("DATASETS")
 CONFIGS_REGISTRY = Registry("CONFIGS")
+# add registry here
 
 ### here the example of the usage:
 def main():
@@ -83,11 +84,11 @@ def main():
 
     # -------- MODEL --------
     # Init one of the models already inited
-    model_class = MODEL_REGISTRY.get(model_config["model_name"])
+    model_class = MODELS_REGISTRY.get(model_config["model_name"])
     model = model_class(model_config)
 
     # -------- DATA --------
-    dataset_class = DATASET_REGISTRY.get(data_config["data_name"])
+    dataset_class = DATASETS_REGISTRY.get(data_config["data_name"])
     dataset = dataset_class(data_config)
 
     print(f"\nUsing model {model.name} for dataset {dataset.name}")
@@ -98,7 +99,7 @@ if __name__ == "__main__":
     verbose = True
     
     ## Pretend these class-inits were in the appropriate files
-    @MODEL_REGISTRY.register("modelA", verbose=verbose)
+    @MODELS_REGISTRY.register("modelA", verbose=verbose)
     class Model_A:
         def __init__(self, config):
             self.name: str = config['model_name']
@@ -106,7 +107,7 @@ if __name__ == "__main__":
             for k,v in config.items():
                 print(f'> {k:10}: {v}')
 
-    @MODEL_REGISTRY.register("modelB", verbose=verbose)
+    @MODELS_REGISTRY.register("modelB", verbose=verbose)
     class Model_B:
         def __init__(self, config):
             self.name: str = config['model_name']
@@ -114,12 +115,12 @@ if __name__ == "__main__":
             for k,v in config.items():
                 print(f'> {k:10}: {v}')
 
-    @MODEL_REGISTRY.register("modelC", verbose=verbose)
+    @MODELS_REGISTRY.register("modelC", verbose=verbose)
     class Model_C:
         def __init__(self, config):
             pass
 
-    @DATASET_REGISTRY.register("weather", verbose=verbose)
+    @DATASETS_REGISTRY.register("weather", verbose=verbose)
     class Weather:
         def __init__(self, config):
             self.name: str = config['data_name']

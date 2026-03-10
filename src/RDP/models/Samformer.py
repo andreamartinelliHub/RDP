@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from .samformer.utils import scaled_dot_product_attention, RevIN
-from ..registry import MODEL_REGISTRY   
+from ..registry import MODELS_REGISTRY   
 
 
 
@@ -28,7 +28,7 @@ from .utils import Embedding_cat_variables
 
 
 
-@MODEL_REGISTRY.register("samformer")
+@MODELS_REGISTRY.register("samformer")
 class Samformer(Base):
     handle_multivariate = True
     handle_future_covariates = False # or at least it seems...

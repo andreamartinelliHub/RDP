@@ -17,9 +17,9 @@ except:
     from .base import Base
 
 from .utils import get_scope
-from ..registry import MODEL_REGISTRY
+from ..registry import MODELS_REGISTRY
 
-@MODEL_REGISTRY.register("{model_id}")
+@MODELS_REGISTRY.register("{model_id}")
 class {model_name}(Base):
     # change according to what the model can do:
     handle_multivariate = False

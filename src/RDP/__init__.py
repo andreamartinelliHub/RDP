@@ -1,2 +1,2 @@
-from .registry import Registry, MODEL_REGISTRY, DATASET_REGISTRY, CONFIGS_REGISTRY
+from .registry import Registry, MODELS_REGISTRY, DATASETS_REGISTRY, CONFIGS_REGISTRY
 from . import models

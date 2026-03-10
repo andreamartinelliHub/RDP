@@ -9,7 +9,7 @@ from .chronos2.layers import ResidualBlock, Chronos2LayerNorm, MLP, MHA, Patch, 
 from .chronos2.config import Chronos2CoreConfig, Chronos2ForecastingConfig
 from transformers.utils.generic import ModelOutput
 from .utils import get_scope
-from ..registry import MODEL_REGISTRY
+from ..registry import MODELS_REGISTRY
 
 try:
     import lightning.pytorch as pl
@@ -29,7 +29,7 @@ class Chronos2Output(ModelOutput):
     enc_group_self_attn_weights: tuple[torch.Tensor, ...] | None = None
 
 
-@MODEL_REGISTRY.register("chronos2")
+@MODELS_REGISTRY.register("chronos2")
 class Chronos2(Base): # type: ignore
 
     handle_multivariate = True
