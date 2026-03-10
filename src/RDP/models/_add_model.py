@@ -20,7 +20,7 @@ from .utils import get_scope
 from ..registry import MODEL_REGISTRY
 
 @MODEL_REGISTRY.register("{model_id}")
-class {class_name}(Base):
+class {model_name}(Base):
     # change according to what the model can do:
     handle_multivariate = False
     handle_future_covariates = False
@@ -65,14 +65,13 @@ class CustomLayer(nn.Module):
         return out
 """
 
-def create_model_file(model_name, needed_aux_folder=True, path_models_folder='.'):
+def create_model_file(model, needed_aux_folder=True):
     
-    model_id = model_name.lower()
+    model_id = model.lower()
     model_name = model_id.capitalize()
     
-    path_models_folder = Path(path_models_folder)
-    model_file_path = path_models_folder/f"{model_id}.py"
-    aux_folder = path_models_folder/f"./{model_id}/"
+    model_file_path = Path(f"{model_name}.py")
+    aux_folder = Path(f"./{model_id}/")
 
     # check possible overwriting
     ovewrite_smth = False
@@ -90,11 +89,10 @@ def create_model_file(model_name, needed_aux_folder=True, path_models_folder='.'
         if response != 'yes':
             sys.exit(1)
 
-
     import_layers = f'from .{aux_folder}.layers import CustomLayer' if needed_aux_folder else ''
     # Formatting the template
     formatted_code = MODEL_TEMPLATE.format(
-                        class_name = model_name,
+                        model_name = model_name,
                         model_id = model_id,
                         import_layers = import_layers
                     )
@@ -114,13 +112,13 @@ def main():
     parser = argparse.ArgumentParser(
         description="Generate model files and folders. This file has to be located in the folder src/RDP/model."
         )
-    parser.add_argument("model_name", type=str, help="The name of the model class to create")
+    parser.add_argument("model", type=str, help="The name of the model class to create")
     parser.add_argument("-a","-l","-c","--aux", action="store_true", help="Create an auxiliary layers folder")
     args = parser.parse_args()
 
-    path_models_folder = '/home/anmartinelli/FBK/RDP/src/RDP/models' # to-do: avoid hardcoded
+    # path_models_folder = '/home/anmartinelli/FBK/RDP/src/RDP/models' # to-do: avoid hardcoded
 
-    create_model_file(args.model_name, args.aux, path_models_folder)
+    create_model_file(args.model, args.aux)
 
 
 if __name__ == "__main__":
