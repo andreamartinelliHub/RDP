@@ -28,7 +28,7 @@ class Registry:
     # - register: save the class into the internal dict ['model name': model_class]
     # - get: from an external config use the string 'model name' to fetch the desired model_class
     # Use it as 
-    # model_class = MODEL_REGISTRY.get(model_config["model_name"])
+    # model_class = MODELS_REGISTRY.get(model_config["model_name"])
     # instance = model_class(model_config)
     def register(self, name=None, verbose = False):
         """Register the decorated class naming it 'name'. If name==None the class name will be used."""
@@ -66,8 +66,8 @@ def main():
 
     Registry.show_all()
     # Class function avoiding print each registry like below:
-    # print(f'Registry {MODEL_REGISTRY._name} contains {MODEL_REGISTRY._module_dict}')
-    # print(f'Registry {DATASET_REGISTRY._name} contains {DATASET_REGISTRY._module_dict}')
+    print(f'Registry {MODELS_REGISTRY._name} contains {MODELS_REGISTRY._module_dict}')
+    print(f'Registry {DATASETS_REGISTRY._name} contains {DATASETS_REGISTRY._module_dict}')
     
     # print(dir(Registry))
 
