@@ -5,20 +5,20 @@ from einops import rearrange, repeat
 from typing import cast
 import torch
 import copy
-from .chronos2.layers import ResidualBlock, Chronos2LayerNorm, MLP, MHA, Patch, InstanceNorm, Chronos2Encoder, Chronos2EncoderOutput
-from .chronos2.config import Chronos2CoreConfig, Chronos2ForecastingConfig
+from .layers import ResidualBlock, Chronos2LayerNorm, MLP, MHA, Patch, InstanceNorm, Chronos2Encoder, Chronos2EncoderOutput
+from .config import Chronos2CoreConfig, Chronos2ForecastingConfig
 from transformers.utils.generic import ModelOutput
-from .utils import get_scope
-from ..registry import MODELS_REGISTRY
+from ..utils import get_scope
+from ...registry import MODELS_REGISTRY
 
 try:
     import lightning.pytorch as pl
-    from .base_v2 import Base
+    from ..Base_v2 import Base
     OLD_PL = False
 except:
     import pytorch_lightning as pl
     OLD_PL = True
-    from .base import Base
+    from ..Base import Base
     
 
 @dataclass
@@ -608,7 +608,7 @@ class Chronos2(Base): # type: ignore
         ones_mask = torch.repeat_interleave(ones_mask, repeats = number_target_vars, dim = 0)
         zeros_mask = torch.zeros(horizon).view(1,-1)
         zeros_mask = torch.repeat_interleave(zeros_mask, repeats = tot_aux_vars, dim = 0)
-        aux_mask = torch.cat((ones_mask, zeros_mask), dim = 0).to(bool)
+        aux_mask = torch.cat((ones_mask, zeros_mask), dim = 0).to(bool) # type: ignore
         # repeat the mask for every group
         full_aux_mask = aux_mask.repeat(batch_size, 1)
         future_target = torch.where(full_aux_mask, future_context, torch.tensor(float('nan')))

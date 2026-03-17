@@ -6,3 +6,16 @@ paths:
   root: /home/anmartinelli/FBK/RDP/
   model_folder: ${.root}/src/RDP/models/
   dataset_folder: ${.root}/src/RDP/datasets/
+
+defaults:
+  - _self_
+  - user: config_user1
+
+experiment:
+  name: "time_series_run_01"
+
+model:
+  target: "LSTMPredictor"    # Matches registry key
+  params:
+    input_dim: 10
+    hidden_dim: 64

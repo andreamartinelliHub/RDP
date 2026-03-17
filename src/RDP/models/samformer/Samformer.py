@@ -5,25 +5,26 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from .samformer.utils import scaled_dot_product_attention, RevIN
-from ..registry import MODELS_REGISTRY   
+from .utils import scaled_dot_product_attention, RevIN
+from ...registry import MODELS_REGISTRY   
 
 
 
 try:
     import lightning.pytorch as pl
-    from .base_v2 import Base
+    from ..Base_v2 import Base
     OLD_PL = False
 except:
     import pytorch_lightning as pl
     OLD_PL = True
-    from .base import Base
-from .utils import QuantileLossMO,Permute, get_activation
+    from ..Base import Base
+    
+from ..utils import QuantileLossMO,Permute, get_activation
 
 from typing import List, Union
-from ..data_structure.utils import beauty_string
-from .utils import  get_scope
-from .utils import Embedding_cat_variables
+from ...data_structure.utils import beauty_string
+from ..utils import  get_scope
+from ..utils import Embedding_cat_variables
 
 
 

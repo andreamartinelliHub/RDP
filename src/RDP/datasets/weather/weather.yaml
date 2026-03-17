@@ -1,0 +1,4 @@
+ 
+data:
+  target: "MyTimeSeriesData" # Matches registry key
+  path: "./data/raw/data.csv"

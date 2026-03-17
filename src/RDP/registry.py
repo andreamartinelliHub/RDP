@@ -58,7 +58,7 @@ class Registry:
 # Instantiate here the needed Registries
 MODELS_REGISTRY = Registry("MODELS")
 DATASETS_REGISTRY = Registry("DATASETS")
-CONFIGS_REGISTRY = Registry("CONFIGS")
+# CONFIGS_REGISTRY = Registry("CONFIGS")
 # add registry here
 
 ### here the example of the usage:
