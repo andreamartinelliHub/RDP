@@ -1,0 +1,16 @@
+0:
+  # FILE PATHS
+  data_path: synthetic/generated.csv
+  # LOAD_SIGNAL PARAMS
+  target_vars:
+  - y
+  group: 'group'
+  enrich_cat: []
+  use_past_variables: True
+  future_vars: []
+  categorical_past_vars: []
+  categorical_fut_vars: []
+  check_past: False
+  check_holes_and_duplicates: False
+  silly_model: False
+  sampler_weights: null

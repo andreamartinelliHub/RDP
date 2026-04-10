@@ -2,7 +2,6 @@
 
 A modular, registry-driven framework designed for the rapid integration of Time-Series models and datasets. This project decouples data engineering from model architecture, allowing you to swap components via configuration without touching the core pipeline.
 
-
 ## Table of Contents
 - [UV Installation](#uv-installation-)
 
@@ -14,6 +13,9 @@ A modular, registry-driven framework designed for the rapid integration of Time-
 4. Prepare the experiments/exp/ folder  
 5. Split data and Train the model
 6. Save things
+
+> Char `(@^@)` to be searched to find spots to be edited. It should be you and your glasses serching keypoints of the library to add/edit/customize things.
+About removing things, like to lighten the project folder in your use case, I'm trying to organize things in folders so you simply delete the associated folder of a model or dataset doesn't broke anything.
 
 ## 🌿 Environment Creation
 The creation of the environment is handled by uv: https://docs.astral.sh/uv/getting-started/

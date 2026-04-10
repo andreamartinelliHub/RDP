@@ -37,7 +37,11 @@ def beauty_string(message:str,type:str,verbose:bool):
         else:
             logger.info(message)
     
-def extend_time_df(x:pd.DataFrame,freq:Union[str,int],group:Union[str,None]=None,global_minmax:bool=False)-> pd.DataFrame:
+def extend_time_df(x:pd.DataFrame,
+    freq: Union[str,int],
+    group: Union[str,None] = None,
+    global_minmax: bool = False
+    )-> pd.DataFrame:
     """Utility for generating a full dataset and then merge the real data
 
     Args:
@@ -50,14 +54,11 @@ def extend_time_df(x:pd.DataFrame,freq:Union[str,int],group:Union[str,None]=None
     """
 
     if group is None:
-
         if isinstance(freq,int):
-            empty = pd.DataFrame({'time':list(range(x.time.min(),x.time.max(),freq))})
+            empty = pd.DataFrame({'time':list(range(x.time.min(), x.time.max(), freq))})
         else:
-            empty = pd.DataFrame({'time':pd.date_range(x.time.min(),x.time.max(),freq=freq)})
-
+            empty = pd.DataFrame({'time':pd.date_range(x.time.min(), x.time.max(), freq=freq)})
     else:
-        
         if global_minmax:
             _min = pd.DataFrame({group:x[group].unique(),'time':x.time.min()})
             _max = pd.DataFrame({group:x[group].unique(),'time':x.time.max()})
